@@ -2,8 +2,8 @@ import RPi.GPIO as GPIO
 from time import sleep
 import sys
 
-led = [14, 15, 18, 23, 24, 25, 8, 7, 12, 16]
-bottoni = [2, 3]
+led = [14, 15, 18, 23, 25, 8, 7, 12, 16, 20]
+bottoni = [2, 21]
 
 GPIO.setmode(GPIO.BCM)
 for init in led:
