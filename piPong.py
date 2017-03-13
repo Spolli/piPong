@@ -2,7 +2,7 @@ import RPi.GPIO as GPIO
 from time import sleep
 import sys
 
-led = [14, 15, 18, 23, 25, 8, 7, 12, 16, 20]
+led = [3, 4, 17, 27, 22, 10, 9, 11]
 bottoni = [2, 21]
 
 GPIO.setmode(GPIO.BCM)
@@ -15,44 +15,49 @@ GPIO.setwarnings(False)
 def andata():
     for i in led:
         GPIO.output(i, 1)
-    	sleep(0.2)
-    	GPIO.output(i, 0)
-    	sleep(0.2)
+        sleep(0.2)
+        GPIO.output(i, 0)
+        sleep(0.2)
 
 def ritorno():
-    for i in led[::-1]:
+    for i in reversed(led):
         GPIO.output(i, 1)
-    	sleep(0.2)
-    	GPIO.output(i, 0)
-    	sleep(0.2)
+        sleep(0.2)
+        GPIO.output(i, 0)
+        sleep(0.2)
 
 def vittoriaRosso():
-    for time in 5:
-        for init in led:
+    for time in range(5):
+        for init in led[4:]:
             GPIO.output(init, 1)
         sleep(0.2)
-        for init in led:
+        for init in led[4:]:
             GPIO.output(init, 0)
         sleep(0.2)
 
 def vittoriaVerde():
-    for time in 5:
-        for init in led:
+    for time in range(5):
+        for init in led[:4]:
             GPIO.output(init, 1)
         sleep(0.2)
-        for init in led:
+        for init in led[:4]:
             GPIO.output(init, 0)
         sleep(0.2)
 
-continua = True
-while(continua):
-    if(bottoni[1] == 1 and led[led.lenght] == 1):
-        ritorno()
-        if(bottoni[0] == 1 and led[0] == 1):
-            andata()
+def main():
+    continua = True
+    andata()
+    while(continua):
+        if not (GPIO.input(bottoni[1])):
+            ritorno()
+            if not (GPIO.input(bottoni[0])):
+                andata()
+            else:
+                vittoriaRosso()
+                continua = False
         else:
-            vittoriaRosso()
+            vittoriaVerde()
             continua = False
-    else:
-        vittoriaVerde()
-        continua = False
+
+if __name__ == "__main__":
+    main()
