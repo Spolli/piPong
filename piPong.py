@@ -1,57 +1,58 @@
 import RPi.GPIO as GPIO
 from time import sleep
-import sys
 
-led = [3, 4, 17, 27, 22, 10, 9, 11]
+led = [14, 15, 18, 23, 25, 8, 7, 12, 16, 20]
 bottoni = [2, 21]
+vel = 0.5
 
-GPIO.setmode(GPIO.BCM)
-for init in led:
-    GPIO.setup(init, GPIO.OUT)
-for init2 in bottoni:
-    GPIO.setup(init2, GPIO.IN)
-GPIO.setwarnings(False)
+def init()
+    GPIO.setmode(GPIO.BCM)
+    for init in led:
+        GPIO.setup(init, GPIO.OUT)
+    for init2 in bottoni:
+        GPIO.setup(init2, GPIO.IN)
+    GPIO.setwarnings(False)
 
 def andata():
     for i in led:
         GPIO.output(i, 1)
-        sleep(0.2)
-        GPIO.output(i, 0)
-        sleep(0.2)
+    	sleep(vel)
+    	GPIO.output(i, 0)
+    	sleep(vel)
 
 def ritorno():
-    for i in reversed(led):
+    for i in led[::-1]:
         GPIO.output(i, 1)
-        sleep(0.2)
-        GPIO.output(i, 0)
-        sleep(0.2)
+    	sleep(vel)
+    	GPIO.output(i, 0)
+    	sleep(vel)
 
 def vittoriaRosso():
-    for time in range(5):
-        for init in led[4:]:
+    for time in 5:
+        for init in led:
             GPIO.output(init, 1)
         sleep(0.2)
-        for init in led[4:]:
+        for init in led:
             GPIO.output(init, 0)
         sleep(0.2)
 
 def vittoriaVerde():
-    for time in range(5):
-        for init in led[:4]:
+    for time in 5:
+        for init in led:
             GPIO.output(init, 1)
         sleep(0.2)
-        for init in led[:4]:
+        for init in led:
             GPIO.output(init, 0)
         sleep(0.2)
 
 def main():
     continua = True
-    andata()
     while(continua):
-        if not (GPIO.input(bottoni[1])):
+        if(bottoni[1] == 1 and led[led.lenght] == 1):
             ritorno()
-            if not (GPIO.input(bottoni[0])):
+            if(bottoni[0] == 1 and led[0] == 1):
                 andata()
+                vel -= 0.05
             else:
                 vittoriaRosso()
                 continua = False
@@ -60,4 +61,5 @@ def main():
             continua = False
 
 if __name__ == "__main__":
+    init()
     main()
