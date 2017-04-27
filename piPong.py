@@ -7,10 +7,10 @@ vel = 0.5
 
 def init()
     GPIO.setmode(GPIO.BCM)
-    for init in led:
-        GPIO.setup(init, GPIO.OUT)
-    for init2 in bottoni:
-        GPIO.setup(init2, GPIO.IN)
+    for i in led:
+        GPIO.setup(i, GPIO.OUT)
+    for i in bottoni:
+        GPIO.setup(i, GPIO.IN)
     GPIO.setwarnings(False)
 
 def andata():
@@ -28,21 +28,21 @@ def ritorno():
     	sleep(vel)
 
 def vittoriaRosso():
-    for time in 5:
-        for init in led:
-            GPIO.output(init, 1)
+    for time in range(5):
+        for i in led:
+            GPIO.output(i, 1)
         sleep(0.2)
-        for init in led:
-            GPIO.output(init, 0)
+        for i in led:
+            GPIO.output(i, 0)
         sleep(0.2)
 
 def vittoriaVerde():
-    for time in 5:
-        for init in led:
-            GPIO.output(init, 1)
+    for time in range(5):
+        for i in led:
+            GPIO.output(i, 1)
         sleep(0.2)
-        for init in led:
-            GPIO.output(init, 0)
+        for i in led:
+            GPIO.output(i, 0)
         sleep(0.2)
 
 def main():
