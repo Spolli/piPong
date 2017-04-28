@@ -5,7 +5,7 @@ led = [14, 15, 18, 23, 25, 8, 7, 12, 16, 20]
 bottoni = [2, 21]
 vel = 0.5
 
-def init()
+def __init__():
     GPIO.setmode(GPIO.BCM)
     for i in led:
         GPIO.setup(i, GPIO.OUT)
@@ -48,9 +48,9 @@ def vittoriaVerde():
 def main():
     continua = True
     while(continua):
-        if(bottoni[1] == 1 and led[led.lenght] == 1):
+        if(GPIO.input(bottoni[1]) == 1):
             ritorno()
-            if(bottoni[0] == 1 and led[0] == 1):
+            if(GPIO.input(bottoni[0]) == 1):
                 andata()
                 vel -= 0.05
             else:
@@ -61,5 +61,4 @@ def main():
             continua = False
 
 if __name__ == "__main__":
-    init()
     main()
