@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 import RPi.GPIO as GPIO
 from time import sleep
 
@@ -21,7 +23,8 @@ def andata():
     	sleep(vel)
 
 def ritorno():
-    for i in led[::-1]:
+    #led[::-1]:
+    for i in reversed(led):
         GPIO.output(i, 1)
     	sleep(vel)
     	GPIO.output(i, 0)
@@ -46,19 +49,25 @@ def vittoriaVerde():
         sleep(0.2)
 
 def main():
-    continua = True
-    while(continua):
-        if(GPIO.input(bottoni[1]) == 1):
-            ritorno()
-            if(GPIO.input(bottoni[0]) == 1):
-                andata()
-                vel -= 0.05
+    try:
+        continua = True
+        while(continua):
+            if(GPIO.input(bottoni[1]) == 1):
+                ritorno()
+                if(GPIO.input(bottoni[0]) == 1):
+                    andata()
+                    vel -= 0.05
+                else:
+                    vittoriaRosso()
+                    continua = False
             else:
-                vittoriaRosso()
+                vittoriaVerde()
                 continua = False
-        else:
-            vittoriaVerde()
-            continua = False
+    except:
+        GPIO.cleanup()
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except:
+        pass
