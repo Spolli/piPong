@@ -52,9 +52,9 @@ def main():
     try:
         continua = True
         while(continua):
-            if(GPIO.input(bottoni[1]) == 1):
+            if not GPIO.input(bottoni[1]):
                 ritorno()
-                if(GPIO.input(bottoni[0]) == 1):
+                if not GPIO.input(bottoni[0]):
                     andata()
                     vel -= 0.05
                 else:
@@ -69,5 +69,5 @@ def main():
 if __name__ == "__main__":
     try:
         main()
-    except:
+    except KeyboardInterrupt:
         pass
