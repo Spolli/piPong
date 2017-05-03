@@ -36,30 +36,31 @@ def ritorno():
 
 def vittoriaRosso():
     for time in range(5):
-        for i in led:
-            GPIO.output(i, 1)
+        for init in led[4:]:
+            GPIO.output(init, 1)
         sleep(0.2)
-        for i in led:
-            GPIO.output(i, 0)
+        for init in led[4:]:
+            GPIO.output(init, 0)
         sleep(0.2)
 
 
 def vittoriaVerde():
     for time in range(5):
-        for i in led:
-            GPIO.output(i, 1)
+        for init in led[:4]:
+            GPIO.output(init, 1)
         sleep(0.2)
-        for i in led:
-            GPIO.output(i, 0)
+        for init in led[:4]:
+            GPIO.output(init, 0)
         sleep(0.2)
 
 
 def main():
     continua = True
+    andata()
     while(continua):
-        if not GPIO.input(bottoni[1]):
+        if not (GPIO.input(bottoni[1])):
             ritorno()
-            if not GPIO.input(bottoni[0]):
+            if not (GPIO.input(bottoni[0])):
                 andata()
                 vel -= 0.05
             else:
