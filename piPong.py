@@ -53,10 +53,10 @@ def main():
     continua = True
     andata(vel)
     while(continua):
-        if (GPIO.input(bottoni[0]) == 0 && GPIO.input(controllo[0]) == 0):
+        if (GPIO.input(bottoni[0]) == 0 and GPIO.input(controllo[0]) == 0):
             ritorno(vel)
 	        vel = random.uniform(0.01, 0.1)                   #A ogni giro la velocità viene gerata randomicamente tra 0.01 secondi e 0.1 sec
-            if (GPIO.input(bottoni[1]) == 0 && GPIO.input(controllo[1]) == 0):
+            if (GPIO.input(bottoni[1]) == 0 and GPIO.input(controllo[1]) == 0):
                 andata(vel)
 		        vel = random.uniform(0.01, 0.1)
             else:
