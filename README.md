@@ -1,5 +1,5 @@
 # piPong
-Il piPong è un gioco ideato da Alberto Spilli.
+Il piPong è un gioco ideato da Spolli.
 
 ## Obbiettivo
 Riprodurre il gioco del ping pong su una breadboard utilizzando dei led e un raspberry per comandarli
